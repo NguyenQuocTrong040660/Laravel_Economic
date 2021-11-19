@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Component\Recusive1;
 use App\Models\Categogy;
+use App\Models\product;
+use App\Models\Silder;
 use Illuminate\Http\Request;
-use function PHPUnit\Framework\stringContains;
+
 
 
 class categorycontroller extends Controller
@@ -28,6 +30,7 @@ class categorycontroller extends Controller
 
     // dieu huong tra ve index
     public function index(){
+
         $result = Categogy::paginate(5);
 
         return view('admin.category.index',compact('result'));
@@ -43,7 +46,7 @@ class categorycontroller extends Controller
             'slug'=> str_slug($httpRequest->name)
             ]);
 
-       return redirect()->route('admin.category.index'); //chuyen huong den trang category.index
+       return redirect()->route('category.index'); //chuyen huong den trang category.index
 
     }
 
@@ -83,7 +86,7 @@ class categorycontroller extends Controller
             'parent_id'=>$request->parent_id,
             'slug'=> str_slug($request->name)
         ]);
-        return redirect()->route('admin.category.index');
+        return redirect()->route('category.index');
 
     }
 
@@ -91,10 +94,17 @@ class categorycontroller extends Controller
 
     public function delete($id){
         $this->category->find($id)->delete();
-         return  redirect()->route('admin.category.index');
+         return  redirect()->route('category.index');
     }
 
 
+    //Frontend
+    public function indexfrontend($slug,$category_id){
+        $all_slider = Silder::latest()->get();
+        $all_categogies = Categogy::where('parent_id',0)->get();
+        $product = product::where('category_id',$category_id)->paginate(5);
+        return view('product_frontend.category.list',compact('all_categogies','product','all_slider'));
+    }
 
 }
 

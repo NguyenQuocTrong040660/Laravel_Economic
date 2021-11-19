@@ -16,10 +16,17 @@ class AdminController extends Controller
            'name'=>$request->username,
            'password'=>$request->password,
        ], $remember_me)) {
-           return redirect()->to('home');
+           return view('home');
        }else{
 
            return view('login');
        }
     }
+    public function trangindexAdmin(){
+        return view('home');
+    }
+
+
 }
+
+

@@ -41,6 +41,7 @@
 
                 <div id="login-box" class="col-md-12">
                     <form id="login-form" class="form" action="{{route('admin.login')}}" method="post">
+
                         @csrf
                         <h3 class="text-center text-info">Login</h3>
                         <div class="form-group">

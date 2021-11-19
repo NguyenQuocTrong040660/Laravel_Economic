@@ -20,7 +20,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="{{route('product.store')}}" method="POST">
+                        <form action="{{route('product.store')}}" enctype="multipart/form-data" method="post">
                         @csrf <!-- {{ csrf_field() }} -->
                             <div class="form-group">
                                 <label for="sp">Tên sản Phẩm</label>
@@ -39,20 +39,20 @@
 
                             <div class="form-group">
                                 <label for="image_path">Ảnh chi tiết</label>
-                                <input type="file" class="form-control-file" id="image_path"  name="image_path[]" placeholder="Enter Category">
+                                <input type="file" multiple class="form-control-file" id="image_path"  name="image_path[]" placeholder="Enter Category">
                             </div>
 
                             <div class="form-group ">
                                 <label for="inputState">Danh mục</label>
-                                <select id="inputState" class="form-control select2-init" name="parent_id">
+                                <select id="inputState" class="form-control" name="category_id">
                                     <option  value="0">Danh Muc Cha</option>
-
+                                    {!! $htmlOption  !!}
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="">Chọn tags </label>
-                                <select class="form-control select2" multiple="multiple" >
+                                <select class="form-control select2"  name="tags[]"   multiple="multiple"  >
 
                                 </select>
 
@@ -60,10 +60,10 @@
 
                             <div class="form-group">
                                 <label for="content">Content</label>
-                                <textarea class="form-control tynimce_init" id="content" rows="3"></textarea>
+                                <textarea class="form-control tynimce_init"  name="contents" id="contents" rows="3"></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button  onclick="return confirm('Are you sure?')" type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
 
@@ -76,8 +76,12 @@
 @endsection
 
 @section('js')
+    <!-- / Them Select2 -->
             <script src="{{asset('vendors/select2.min.js')}}"></script>
             <script src="{{asset('admins/add/select2.js')}}"> </script>
+        <!-- /Them Tynicme -->
             <script src="{{asset('vendors/tinymce.min.js')}}" referrerpolicy="origin"></script>
+
+
 
 @endsection

@@ -4,6 +4,7 @@
 @section('title')
     <title>Product_index</title>
 @endsection
+
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -33,25 +34,37 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+                            $i=0;
+                            ?>
+                            @foreach($data as $value)
+                                <?php
+                                $i++;
+
+                                ?>
+
                                 <tr>
-                                    <td> 1 </td>
-                                    <td> IPhone13</td>
-                                    <td>10.000.000</td>
-                                    <td></td>
-                                    <td>Điện Thoại</td>
+                                    <td> {{$i}} </td>
+                                    <td> {{$value->name}} </td>
+                                    <td> {{$value->price}} </td>
+                                    <td><img src="{{$value->feature_image_path}}" width="100px" height="100px"/> </td>
+                                    <td> {{$value->caterogy['name']}} </td>
                                     <td>
-                                        <a href="#" class="btn btn-success">Edit</a>
-                                        <a onclick="return confirm('Are you sure?')" href="#" class="btn btn-danger">Delete</a>
+                                        <a href="{{route('product.edit',$value->id)}}" class="btn btn-success">Edit</a>
+                                        <a onclick="return confirm('Are you sure?')" href="{{route('product.delete',$value->id)}}" class="btn btn-danger" data="{{$value->id}}" id="deleteProduct">Delete</a>
 
                                     </td>
 
                                 </tr>
-
+                            @endforeach
 
                             </tbody>
                         </table>
 
                     </div>
+
+                {{ $data->links() }}
+
 
 
                 <!-- /.row -->
@@ -61,4 +74,5 @@
         </div>
 
 @endsection
+
 

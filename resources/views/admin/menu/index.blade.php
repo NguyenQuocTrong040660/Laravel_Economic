@@ -48,14 +48,15 @@
 
                     </div>
                     <div class="col-md-12">
-                {{ $reult->links() }}
+                        {{ $reult->links() }}
                     </div>
 
-                <!-- /.row -->
+                    <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content -->
         </div>
 
-@endsection
+        @endsection
+
 

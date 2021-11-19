@@ -45,10 +45,7 @@
                         </table>
 
                     </div>
-
-
                        {{ $result->links() }}
-
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

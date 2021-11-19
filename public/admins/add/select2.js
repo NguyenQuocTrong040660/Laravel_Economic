@@ -1,7 +1,8 @@
  $(function (){
     $ ( ".select2" ). select2 ({
         tags : true ,
-        tokenSeparators : [ ',' , '' ] })
+        tokenSeparators : [',']
+    })
 
     $ ( ".select2-init" ). select2 ({
     placeholder: "Select a state",
@@ -10,7 +11,8 @@
 
 
          let editor_config = {
-         path_absolute : "/",
+             forced_root_block : false,
+             path_absolute : "/",
          selector: 'textarea.tynimce_init',
          relative_urls: false,
          plugins: [
@@ -44,6 +46,7 @@
      });
      }
      };
+
 
          tinymce.init(editor_config);
 

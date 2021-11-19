@@ -30,4 +30,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+
+
+
+'facebook' => [
+    'client_id' => '6196904687050615',  //client face của bạn
+    'client_secret' => '63a2cd909c6fe00e4787048a8b658132',  //client app service face của bạn
+    'redirect' => 'https://shop69tt.com/login/callback' //callback trả về
+],
+
 ];

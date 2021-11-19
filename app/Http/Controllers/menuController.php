@@ -37,7 +37,7 @@ class menuController extends Controller
            'parent_id'=>$request->parent_id,
            'slug' => str_slug($request->name)
         ]);
-        return redirect()->route('admin.menu.index');
+        return redirect()->route('menu.index');
 
     }
 
@@ -63,11 +63,11 @@ class menuController extends Controller
           'parent_id'=>$request->parent_id,
           'slug'=> str_slug($request->name)
       ]);
-  return redirect()->route('admin.menu.index');
+  return redirect()->route('menu.index');
     }
 
     public function delete($id){
         $this->menu->find($id)->delete();
-        return redirect()->route('admin.menu.index');
+        return redirect()->route('menu.index');
     }
 }
