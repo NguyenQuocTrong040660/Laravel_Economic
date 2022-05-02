@@ -160,11 +160,17 @@
                                 @endforeach
 
                             <tr>
-                                <td colspan="5"  class="formattotal"><strong>VAT: {{number_format($total * 0.01).'vnđ'}}</strong></td>
+                                <td colspan="5"  class="formattotal">
+                                    <strong> Phí vận chuyển:</strong> {{number_format($shipping->fee_ship).'vnđ'}}</td>
 
                             </tr>
                             <tr>
-                                <td colspan="5"  class="formattotal"> <strong>Thanh toán: {{number_format($total + ($total * 0.01)). 'vnđ' }}</strong></td>
+                                <td colspan="5"  class="formattotal"><strong>Thuế (10%):</strong> {{number_format($total * 0.1).'vnđ'}}</td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="5"  class="formattotal"> <strong>Thanh toán:
+                                        {{number_format($total + ($total * 0.1)+$shipping->fee_ship). 'vnđ' }}</strong></td>
 
                             </tr>
 

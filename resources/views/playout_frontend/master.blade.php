@@ -50,7 +50,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
     <script type="text/javascript">
+
+
         //Ajax handel Hien thi so luong 1 2 3 khi addTocart
         slg_Adtocart();
         function slg_Adtocart(){
@@ -115,6 +120,7 @@
 
       };
 
+      //Cap nhat gio hang
       function updatecart(key,qty){
           $.ajax({
               url:"{{url('updatecart')}}/"+key+"/"+qty,
@@ -131,6 +137,7 @@
           $('.qtybtn').on('click',updateCart);
 
       });
+        //Cap nhat gio hang
 
       /*-----------
       Delete cart
@@ -138,9 +145,8 @@
        -----------*/
 
 
-        /*-----------
-          Thanh toan - Dia chi giao hang
-     -----------*/
+        //-----------// Thanh toan - Dia chi giao hang
+
 
         $('.chonselect').change(function (){
             var action =$(this).attr('id');
@@ -153,12 +159,33 @@
                 result='wards';
             }
 
+
             $.ajax({
                 url: "{{route('delivery')}}",
                 method:'POST',
                 data:{action:action,ma_id:ma_id,_token:_token},
                 success:function (data){
                     $('#'+result).html(data);
+                }
+            });
+        });
+
+        //Tinh Phi Van Chuyen
+       // btnVanChuyen
+
+        $('.btnVanChuyen').click(function (){
+
+            var city = $('#city').val();
+            var province = $('#province').val();
+            var wards = $('#wards').val();
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url: "{{route('tinh-phi-van-chuyen')}}",
+                method:'POST',
+                data:{city:city,province:province,wards:wards,_token:_token},
+                success:function (data){
+                          location.reload();
                 }
             });
         });
@@ -187,7 +214,6 @@
                     $.ajax({
                         url: "{{route('shipping_oder')}}",
                         method:'POST',
-
                         data:{name:name,phone:phone,payment:payment,city:city,province:province,wards:wards,_token:_token},
                         success:function (){
                             Swal.fire('Saved!', '', 'success')

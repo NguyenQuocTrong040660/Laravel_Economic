@@ -41,6 +41,10 @@ Route::get('/so-luong-gio-hang','App\Http\Controllers\CartController@hienThiSlgT
 Route::get('/delete-cart/{product_id}','App\Http\Controllers\CartController@deletecartAjax')->name('deletecart');
 
 //Check_Count
+
+//Thanh Toan VNPay
+   //  Route::post('/vnPay','App\Http\Controllers\CheckAcount@vnPay_Payment')->name('vnPay');
+  //   Route::get('/return-vnPay','App\Http\Controllers\CheckAcount@return_vnpay')->name('return-vnpay');
  //login de thanhtoan
 Route::get('/login','App\Http\Controllers\CheckAcount@checkcount')->name('check_acount');
 //logout
@@ -58,7 +62,14 @@ Route::post('/dangki','App\Http\Controllers\CheckAcount@registerCustomer')->name
 //shipping_oder save address
 Route::post('/thanh-toan/gui-don-hang','App\Http\Controllers\CheckAcount@shipping_oder')->name('shipping_oder');
 
-Route::get('/thanh-toan/xoa-phi','App\Http\Controllers\CheckAcount@delete_fee_ship')->name('delete_fee_ship');
+
+
+//Tinh Phi van chuyen
+Route::post('/thanh-toan/','App\Http\Controllers\CheckAcount@TinhPhiVanChuyen')->name('tinh-phi-van-chuyen');
+
+//delete Phi Vanchuyen
+Route::get('/thanh-toan/xoa-phi','App\Http\Controllers\CheckAcount@xoaPhiVanChuyen')->name('delete_fee_ship');
+
 
 //Login facebook
 Route::get('/login-facebook','App\Http\Controllers\CheckAcount@login_facebook')->name('login_facebook');
@@ -171,6 +182,13 @@ Route::prefix('admin')->group(function (){
 
            Route::get('/','App\Http\Controllers\OrderController@DoanhThu')->name('DoanhThu');
            //Delivery
+
+            Route::post('/','App\Http\Controllers\OrderController@DoanhThuByDate')->name('loc-doanh-thu');
+           Route::post('/nowday','App\Http\Controllers\OrderController@filter_order_now_day')->name('filter_order_now_day');
+
+            ///Su kien loc doanh thu theo tuan thang nam
+
+
 
 
 

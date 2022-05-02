@@ -34,7 +34,7 @@ class ProductController extends Controller
     use StrorageProductImage;
     public  function index(){
 
-        $data = $this->product->paginate(5);
+        $data = $this->product->paginate(10);
         return view('admin.product.index',compact('data'));
     }
 
@@ -60,7 +60,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-//            DB::beginTransaction();
+       //    DB::beginTransaction();
             $data = [
                 'name' => $request->name,
                 'price' => $request->gia,
@@ -101,11 +101,11 @@ class ProductController extends Controller
             //Inser vao intermedia table : Product_tag
             $result->product_tags()->attach($tag_id);
 
-//            DB::commit();
+          //  DB::commit();
 
         }
         catch (\Exception $exception){
-//            DB::rollBack();
+         //   DB::rollBack();
             Log::error("message:".$exception->getMessage()."--Line" .$exception->getLine());
 
         }
@@ -208,6 +208,9 @@ class ProductController extends Controller
               //lay san pham theo id
               $detail_id = $this->product->find($product_id);
 
+              //Rating
+
+              //Rating
 
               // lay id san pham lien quan  theo category
               $product_recomman = product::where('category_id',$detail_id->category_id)->whereNotIn('id',[$product_id])->paginate(3);
@@ -225,10 +228,6 @@ class ProductController extends Controller
             $getData = $request->nameproduct;
             //truyvan table
             $product = product::where('name','like','%'.$getData.'%')->get();
-
-
-
-
 
             // lay id san pham lien quan  theo category
 

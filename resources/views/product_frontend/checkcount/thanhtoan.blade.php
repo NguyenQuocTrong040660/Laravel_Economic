@@ -59,6 +59,10 @@
                                         <option value="Tiền mặt">Tiền mặt</option>
                                     </select>
 
+                                    {{-- Thanh toan Paypal--}}
+                                      <br/>
+
+
                             </div>
                             </div>
                         <div class="col-md-6">
@@ -98,7 +102,10 @@
 
                                         <div  >
                                          <input type="button" class="btnguidonhang" value="Gửi đơn hàng"/>
+                                            <input type="button" class="btnVanChuyen" value="Tính phí vận chuyển"/>
                                         </div>
+
+
 
                                               </div>
 
@@ -136,10 +143,13 @@
 
                             <?php
                             if(session()->get('cart')==true){
+
                             $tongtien = 0;
                             $ii=0;
                             $i=0;
+                            $phivanchuyen=0;
                             $total=0;
+                            $tongcophi=0;
 
                             ?>
 
@@ -148,7 +158,7 @@
                                 <?php
                                 $i++;
                                 $tongtien =$tongtien+ ($cartItem['price'] * $cartItem['quantity']);
-                                $phiVAT =$tongtien*0.01;
+                                $phiVAT =$tongtien*0.1;
                                 $total = $tongtien + $phiVAT;
 
                                 ?>
@@ -189,7 +199,10 @@
                                     </td>
                                 </tr>
 
+
+
                             @endforeach
+
                             <?php
                             }
                             ?>
@@ -202,6 +215,7 @@
 
                 </div>
                 @if(session()->get('cart'))
+
                 <div class="col-md-3">
                     <br>
                     <br>
@@ -211,27 +225,40 @@
                         <ul>
                             <li>Tổng: <span>{{number_format($tongtien). 'vnđ'}}</span></li>
                             <li>VAT 10%:  <span>{{number_format($phiVAT). 'vnđ'}}</span></li>
+
+
+                             <?php
+                            if(session()->get('get_fee_ship')==true){
+
+                                 ?>
+                            @foreach(session()->get('get_fee_ship') as $key=>$fee_ship)
+                                <?php
+
+                                $total += $fee_ship['fee_feeship'];
+                                ?>
+
+                                <a href="{{route('delete_fee_ship')}}" >
+                                    <li class="fa fa-times">Phí vận chuyển:
+                                        <span>{{number_format($fee_ship['fee_feeship']). 'vnđ'}}</span></li>
+                                </a>
+                            @endforeach
+                            <?php }
+
+                            ?>
+
                             <li>Tổng tiền:  <span>{{number_format($total). 'vnđ'}}</span></li>
+
 
                         </ul>
 
 
-                        {{--                                        <?php--}}
-                        {{--                                        if(session()->has('customer_name')){--}}
-                        {{--                                        ?>--}}
-                        {{--                                        <a class="btn btn-default check_out" href="{{route('thanhtoan')}}">Thanh toán</a>--}}
-                        {{--                                        <?php--}}
-                        {{--                                        }--}}
-                        {{--                                        else{--}}
-                        {{--                                        ?>--}}
-                        {{--                                        <a class="btn btn-default check_out" href="{{route('check_acount')}}">Thanh toán</a>--}}
 
-                        {{--                                        <?php--}}
-                        {{--                                        }--}}
-                        {{--                                        ?>--}}
                     </div>
                 </div>
                 @endif
+
+
+
             </div>
 
 

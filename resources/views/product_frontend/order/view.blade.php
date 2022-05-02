@@ -27,7 +27,7 @@
             <br>
             <br>
             <br>
-            <div style="text-align: center;font-weight: bold;font-size: larger;color: #1A94FF"><h2>Chi tiết đơn hàng</h2></div>
+            <div style="text-align: center;font-weight: bold;font-size: larger;color:orangered"><h2>Chi tiết đơn hàng  </h2></div>
             <div class=""row>
                 <div class="col-md-12">
                     <div class="panel-heading">
@@ -53,8 +53,8 @@
                                 <th>Giá</th>
                                 <th>Thành tiền(VNĐ)</th>
 
-
                             </tr>
+
                             </thead>
                             <tbody>
 
@@ -84,12 +84,19 @@
                                 </tr>
                             @endforeach
 
+
                             <tr>
-                                <td colspan="5"  class="formattotal"><strong>VAT: {{number_format($total * 0.01).'vnđ'}}</strong></td>
+                                <td colspan="5"  class="formattotal">
+                                        Phí vận chuyển: {{number_format($shipping->fee_ship).'vnđ'}}</td>
 
                             </tr>
                             <tr>
-                                <td colspan="5"  class="formattotal"> <strong>Thanh toán: {{number_format($total + ($total * 0.01)). 'vnđ' }}</strong></td>
+                                <td colspan="5"  class="formattotal">Thuế(10%): {{number_format($total * 0.1).'vnđ'}}</td>
+
+                            </tr>
+
+                            <tr>
+                                <td colspan="5"  class="formattotal"> <strong>Thanh toán: {{number_format($total + ($total * 0.1)+$shipping->fee_ship). 'vnđ' }}</strong></td>
 
                             </tr>
 

@@ -30,7 +30,7 @@
                                 <th>Lý do hủy</th>
 
 
-                                <th style="width:30px;"></th>
+                                <th >Xem chi tiết</th>
                             </tr>
 
                             </thead>

@@ -187,6 +187,42 @@
                                     </ul>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                                     <p><b>Write Your Review</b></p>
+                                    {{--Danh gia Sao --}}
+                                   {{-- <p><b>Viết đánh giá của bạn</b></p>
+
+                                    <!------Rating here---------->
+                                    <ul class="list-inline rating"  title="Average Rating">
+                                        @for($count=1; $count<=5; $count++)
+                                            @php
+                                                if($count<=$rating){
+                                                    $color = 'color:#ffcc00;';
+                                                }
+                                                else {
+                                                    $color = 'color:#ccc;';
+                                                }
+                                            @endphp
+
+                                            <li title="star_rating" id="{{$value->product_id}}-{{$count}}" data-index="{{$count}}"  data-product_id="{{$value->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
+                                        @endfor
+
+                                    </ul>
+                                    --}}
+                                    <p><b>Viết đánh giá của bạn</b></p>
+                                     <ul class="list-inline"  title="Average Rating">
+                                         @for($count=1; $count<=5; $count++)
+                                          <li title="đánh giá sao"
+                                          id=""
+                                          data-index=""
+                                          data-product_id=""
+                                          data-rating=""
+                                          class="rating"
+                                          style="cursor:pointer; color: #c0dbeb; font-size:30px;">
+                                          &#9733;
+                                        </li>
+                                         @endfor
+
+                                    </ul>
+                                    {{--Danh gia Sao --}}
 
                                     <form action="#">
 										<span>

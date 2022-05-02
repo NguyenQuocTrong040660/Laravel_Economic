@@ -11,63 +11,51 @@
 
         <!-- Main content -->
         <div class="content">
+
+
             <div class="container-fluid">
-                <div class="row">
-
-                    <!--display content data phân trang -->
-                    <div class="col-md-12">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">Mã sản phẩm</th>
-                                <th scope="col">Số lượng</th>
-                                <th scope="col">Giá bán</th>
-                                <th scope="col">Doanh Thu (VNĐ)</th>
 
 
-                            </tr>
 
-                                <th scope="col">Tổng</th>
+                    <div class="row">
 
-                            </thead>
-                            <tbody>
-                            <?php
-                            $i=0;
-                            $sum=0;
-                            $total=0;
-                            ?>
+          {{-- action="{{route('loc-doanh-thu')}}"--}}
+                        <form autocomplete="off"  method="post" >
+                            @csrf
+                                <p>Từ ngày: <input type="text"  name="from_date" id="datepicker" ></p>
 
-                                @foreach($dataproduct as $key=>$doanhthu)
-                                <?php
-                                $i++;
-                                $sum = $doanhthu->total_quantity*$doanhthu->price;
-                                $total +=$sum;
-                                ?>
+                                <p>Đến ngày: <input type="text" name="to_date" id="datepicker2" ></p>
 
-                                <tr>
-                                    <td>{{$i}}</td>
-                                    <td>{{$doanhthu->name}}</td>
-                                    <td>{{$doanhthu->product_id}}</td>
-                                    <td>{{$doanhthu->total_quantity}}</td>
-                                    <td>{{number_format($doanhthu->price)}}</td>
-                                    <td>{{number_format($sum).' '.'vnđ'}}</td>
+                            <p type="button" id="btn-dashboard-filter" class="btn btn-primary btn-danger" value="Lọc kết quả"></p>
 
-                                </tr>
+                            <p>
+                                    Lọc sản phẩm bán được:
+                                    <select class="dashboard-filter form-control" >
+                                        <option v>---Chọn---</option>
+                                        <option value="now_day">Ngày hôm nay</option>
+                                        <option value="7ngay">7 ngày qua</option>
+                                        <option value="thangtruoc">tháng trước</option>
+                                        <option value="thangnay">tháng này</option>
+                                        <option value="365ngayqua">365 ngày qua</option>
+                                    </select>
+                                </p>
 
-
-                            @endforeach
-                            <tr>
-
-                                <td colspan="5" style="text-align: right;font-size: large;font-weight: bold">Tổng  {{number_format($total).' '.'vnđ'}}</td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-
+                        </form>
                     </div>
 
+
+
+
+                <div  id="myfirstchart" style="height: 500px;"></div>
+
+
+
+                <div class="container-fluid" id="doanh_thu_result">
+
+
+                    <div class="container-fluid" id="result_option_thongke_sp">
+
+                    <!--display content data phân trang -->
                 <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>

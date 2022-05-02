@@ -84,7 +84,8 @@
                                         </p>
                                     </td>
                                     <td class="cart_delete">
-                                        <a class="cart_quantity_delete" href="{{route('cart_delete',$c_contend->rowId)}}"><i class="fa fa-times"></i></a>
+                                        <a class="cart_quantity_delete" href="{{route('cart_delete',$c_contend->rowId)}}">
+                                            <i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -115,6 +116,7 @@
 
 
                                     <?php
+
                                     if(session()->has('customer_name')){
                                     ?>
                                     <a class="btn btn-default check_out" href="{{route('thanhtoan')}}">Thanh toán</a>

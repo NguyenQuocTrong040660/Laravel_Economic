@@ -9,7 +9,7 @@ class shipping_oder extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['shipping_name','shipping_phone','medthod_payment','shipping_matp','shipping_maqh','shipping_xaid'];
+    protected $fillable = ['shipping_name','shipping_phone','medthod_payment','shipping_matp','shipping_maqh','shipping_xaid','fee_ship'];
 
     protected $primaryKey = 'shipping_id';
     protected $table = 'shipping_oders';

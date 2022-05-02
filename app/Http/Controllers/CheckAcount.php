@@ -11,13 +11,17 @@ use App\Models\shipping;
 use App\Models\customer_social;
 use App\Models\shipping_oder;
 use App\Models\Silder;
+use App\Models\tbl_thongke;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\Province;
 use App\Models\Wards;
 use App\Models\fee_ship;
-use Illuminate\Support\Facades\Auth;use PhpParser\Node\Expr\Array_;
+use Illuminate\Support\Facades\Auth;
+use mysql_xdevapi\Exception;
+use PhpParser\Node\Expr\Array_;
 session_start();
 class CheckAcount extends Controller
 {
@@ -144,13 +148,25 @@ class CheckAcount extends Controller
         return redirect()->route('payment');
 
    }
+
+   //thanh toan
    public function payment(){
        $all_slider = Silder::latest()->get();
        $all_categogies = Categogy::where('parent_id',0)->get();
         return view('product_frontend.payment.payment',compact('all_categogies','all_slider'));
 }
+
+
  public function shipping_oder(Request $request){
         $data = $request->all();
+
+
+     //lay gia tri feeship
+     $fee_ship = $request->session()->get('get_fee_ship');
+     foreach ($fee_ship as $key=>$fee_ship){
+         $fee = $fee_ship->fee_feeship;
+
+     }
 
         $shipping = shipping_oder::create([
              'shipping_name'=>$data['name'],
@@ -159,16 +175,23 @@ class CheckAcount extends Controller
             'shipping_matp'=> $data['city'] ,
            'shipping_maqh'=>$data['province'],
            'shipping_xaid'=>$data['wards'],
+            'fee_ship'=>$fee
+
         ]);
        $shipping_id =$shipping->shipping_id;
 
+
+
+     $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
        $check_code = substr(md5(microtime()),rand(0,16),5);
        $oders = Order::create([
            'customer_id' => session()->get('customer_id'),
            'shipping_id'=>$shipping_id,
            'order_status'=>1,
-           'order_code'=>$check_code
+           'order_code'=>$check_code,
+           'order_date'=>$now
        ]);
+
 
 
          if( session()->get('cart')==true){
@@ -180,13 +203,13 @@ class CheckAcount extends Controller
                  'product_price' => $cart['price'],
                 'product_quantity'=> $cart['quantity'],
 
+
              ]);
          }
      }
 
          session()->forget('cart');
-
-
+         session()->forget('get_fee_ship');
 
 
     }
@@ -199,5 +222,27 @@ class CheckAcount extends Controller
         return redirect()->back();
 
  }
+
+    public function TinhPhiVanChuyen(Request $request){
+        $data =$request->all();
+        $city= $data['city'];
+        $province= $data['province'];
+        $wards= $data['wards'];
+
+        $get_fee_ship= fee_ship::where('fee_matp',$city)->where('fee_maqh',$province)->where('fee_xaid',$wards)->get();
+
+        session()->put('get_fee_ship', $get_fee_ship);
+
+
+
+
+    }
+
+    //delete_fee_ship
+    public function xoaPhiVanChuyen(){
+        session()->forget('get_fee_ship');
+        return redirect()->back();
+
+    }
 
 }

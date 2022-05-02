@@ -99,7 +99,9 @@
                 <h3>Chọn hình thức thanh toán</h3>
                 Tiền mặt<input type="checkbox" name="payment" value="tiền mặt" >
                 VNPAY<input type="checkbox" name="payment" value="vn pay" >
+
                 Ghi nợ<input type="checkbox" name="payment" value="ghi nợ" >
+
             </div>
         </div>
         </div>
